@@ -1,0 +1,57 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:ScrollBarSizeIssue.Views">
+
+  <!--
+    Additional resources 
+    Using Control Themes:
+         https://docs.avaloniaui.net/docs/basics/user-interface/styling/control-themes
+    Using Theme Variants:
+         https://docs.avaloniaui.net/docs/guides/styles-and-resources/how-to-use-theme-variants
+  -->
+  
+  <Design.PreviewWith>
+    <StackPanel Width="400" Spacing="10">      
+        <StackPanel Background="{DynamicResource SystemRegionBrush}">
+          <views:TestItemsControl />
+        </StackPanel>
+    </StackPanel>
+  </Design.PreviewWith>
+ 
+  <ControlTheme x:Key="{x:Type views:TestItemsControl}" TargetType="views:TestItemsControl">
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Border Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="{TemplateBinding CornerRadius}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Padding="{TemplateBinding Padding}">
+              <Grid>
+                  <ScrollViewer Name="PART_ScrollViewer"
+                                VerticalScrollBarVisibility="Auto"
+                                HorizontalScrollBarVisibility="Auto"
+                                Focusable="True"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                IsScrollInertiaEnabled="True">
+					  
+                      <LayoutTransformControl Name="PART_LayoutTransformControl"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              ClipToBounds="True">
+
+                          <ItemsPresenter Name="PART_ItemsPresenter"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Stretch"
+                                          ItemsPanel="{TemplateBinding ItemsPanel}"/>
+
+                      </LayoutTransformControl>
+                  </ScrollViewer>
+              </Grid>
+          </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
